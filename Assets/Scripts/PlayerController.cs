@@ -7,25 +7,25 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
 
-    public float moveSpeed = 5;
+    public float defaultMoveSpeed = 5;
+    private float currentMoveSpeed;
 
 
-    // Use this for initialization
-    void Start()
+    private void Start()
     {
+        currentMoveSpeed = defaultMoveSpeed;
         anim = transform.GetChild(0).GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Attack();
         Move();
     }
 
     //Attack function
-    void Attack()
+    private void Attack()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -40,13 +40,13 @@ public class PlayerController : MonoBehaviour
 
 
     // character Move Function
-    void Move()
+    private void Move()
     {
         Vector2 playerInput;
         playerInput.x = Input.GetAxisRaw("Horizontal");
         playerInput.y = Input.GetAxisRaw("Vertical");
 
-        rb.velocity = playerInput * moveSpeed;
+        rb.velocity = playerInput * currentMoveSpeed;
 
         //turn player in correct direction
         if (Input.GetKeyDown(KeyCode.A))
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Animation condition
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (rb.velocity.magnitude > 0)
         {
             anim.SetBool("isWalking", true);
         }
