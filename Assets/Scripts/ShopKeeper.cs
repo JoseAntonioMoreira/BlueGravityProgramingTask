@@ -8,6 +8,9 @@ public class ShopKeeper : MonoBehaviour
     [SerializeField]
     private GameObject shop;
 
+    [SerializeField]
+    private GameObject interactPrompt;
+
     private bool isPlayerInRange = false;
 
     // Start is called before the first frame update
@@ -39,6 +42,7 @@ public class ShopKeeper : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             isPlayerInRange = true;
+            interactPrompt.SetActive(true);
         }
     }
 
@@ -47,6 +51,7 @@ public class ShopKeeper : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             isPlayerInRange = false;
+            interactPrompt.SetActive(false);
         }
     }
 }
