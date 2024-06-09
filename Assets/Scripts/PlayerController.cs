@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rb;
-    Animator anim;
+    private Rigidbody2D rb;
+    private Animator anim;
 
-    public float defaultMoveSpeed = 5;
+    [SerializeField]
+    private float defaultMoveSpeed = 5;
     private float currentMoveSpeed;
-
 
     private void Start()
     {
@@ -20,53 +18,46 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Attack();
-        Move();
+        HandleAttack();
+        HandleMovement();
     }
 
-    //Attack function
-    private void Attack()
+    // Attack function
+    private void HandleAttack()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetTrigger("Attack");
         }
-
         else if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             anim.SetTrigger("Attack2");
         }
     }
 
-
-    // character Move Function
-    private void Move()
+    // Character Move function
+    private void HandleMovement()
     {
-        Vector2 playerInput;
-        playerInput.x = Input.GetAxisRaw("Horizontal");
-        playerInput.y = Input.GetAxisRaw("Vertical");
+        Vector2 playerInput = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         rb.velocity = playerInput * currentMoveSpeed;
 
-        //turn player in correct direction
-        if (Input.GetKeyDown(KeyCode.A))
+        HandleDirection(playerInput);
+
+        // Animation condition
+        anim.SetBool("isWalking", playerInput.sqrMagnitude > 0);
+    }
+
+    // Handle player direction
+    private void HandleDirection(Vector2 playerInput)
+    {
+        if (playerInput.x < 0)
         {
             transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (playerInput.x > 0)
         {
             transform.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
         }
-
-        //Animation condition
-        if (rb.velocity.magnitude > 0)
-        {
-            anim.SetBool("isWalking", true);
-        }
-        else
-        {
-            anim.SetBool("isWalking", false);
-        }
-
     }
 }

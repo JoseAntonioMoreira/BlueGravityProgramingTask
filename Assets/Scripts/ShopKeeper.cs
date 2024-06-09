@@ -13,13 +13,6 @@ public class ShopKeeper : MonoBehaviour
 
     private bool isPlayerInRange = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         Interact();
@@ -29,7 +22,7 @@ public class ShopKeeper : MonoBehaviour
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            shop.SetActive(!shop.gameObject.activeSelf);
+            shop.SetActive(!shop.activeSelf);
         }
         else if (!isPlayerInRange)
         {
@@ -39,7 +32,7 @@ public class ShopKeeper : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             isPlayerInRange = true;
             interactPrompt.SetActive(true);
@@ -48,7 +41,7 @@ public class ShopKeeper : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             isPlayerInRange = false;
             interactPrompt.SetActive(false);
