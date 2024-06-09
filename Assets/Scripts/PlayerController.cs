@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
 
     [SerializeField]
+    Inventory inventory;
+
+    [SerializeField]
     private float defaultMoveSpeed = 5;
     private float currentMoveSpeed;
 
@@ -20,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleAttack();
         HandleMovement();
+        HandleInventory();
     }
 
     // Attack function
@@ -58,6 +62,14 @@ public class PlayerController : MonoBehaviour
         else if (playerInput.x > 0)
         {
             transform.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
+        }
+    }
+
+    private void HandleInventory()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            inventory.ToggleInventory();
         }
     }
 }

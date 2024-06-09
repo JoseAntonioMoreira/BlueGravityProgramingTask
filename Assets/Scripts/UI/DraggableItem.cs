@@ -8,6 +8,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 {
     private Image image;
 
+    public InventoryItem item;
+
     [HideInInspector]
     public Transform initialParent;
 

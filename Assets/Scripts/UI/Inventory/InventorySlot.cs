@@ -5,7 +5,14 @@ using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
+    protected PointerEventData eventData;
     public void OnDrop(PointerEventData eventData)
+    {
+        this.eventData = eventData;
+        OnItemDropped();
+    }
+
+    protected virtual void OnItemDropped()
     {
         if (transform.childCount == 0)
         {
