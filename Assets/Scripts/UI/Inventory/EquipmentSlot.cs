@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+using UnityEngine.UI;
 
 public class EquipmentSlot : InventorySlot
 {
+    public SpriteRenderer gearSlot;
     public GearType gearType;
 
     protected override void OnItemDropped()
@@ -13,11 +14,14 @@ public class EquipmentSlot : InventorySlot
         GameObject dropped = eventData.pointerDrag;
         DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
 
-
         if (draggableItem.item.type == gearType)
         {
-            transform.GetChild(0).SetParent(draggableItem.initialParent);
+            if (transform.childCount > 0)
+            {
+                transform.GetChild(0).SetParent(draggableItem.initialParent);
+            }
             draggableItem.initialParent = transform;
+            gearSlot.sprite = draggableItem.item.icon;
         }
     }
 }

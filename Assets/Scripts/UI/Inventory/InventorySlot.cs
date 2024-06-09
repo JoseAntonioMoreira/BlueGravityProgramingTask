@@ -14,11 +14,13 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
     protected virtual void OnItemDropped()
     {
-        if (transform.childCount == 0)
+        GameObject dropped = eventData.pointerDrag;
+        DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
+
+        if (transform.childCount > 0)
         {
-            GameObject dropped = eventData.pointerDrag;
-            DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
-            draggableItem.initialParent = transform;
+            transform.GetChild(0).SetParent(draggableItem.initialParent);
         }
+        draggableItem.initialParent = transform;
     }
 }

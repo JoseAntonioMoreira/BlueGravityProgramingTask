@@ -16,6 +16,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     private void Start()
     {
         image = GetComponent<Image>();
+        image.sprite = item.icon;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -24,6 +25,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         image.raycastTarget = false;
+
+        ChangeEquip();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -35,5 +38,14 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         transform.SetParent(initialParent);
         image.raycastTarget = true;
+    }
+
+    private void ChangeEquip()
+    {
+        if (initialParent.CompareTag("equipSlot"))
+        {
+            EquipmentSlot equipmentSlot = initialParent.GetComponent<EquipmentSlot>();
+            equipmentSlot.gearSlot.sprite = null;
+        }
     }
 }
