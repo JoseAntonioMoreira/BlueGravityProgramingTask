@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class ShopKeeper : MonoBehaviour
 {
     [SerializeField]
+    private GameObject inventory;
+    [SerializeField]
     private GameObject shop;
 
     [SerializeField]
@@ -20,13 +22,15 @@ public class ShopKeeper : MonoBehaviour
 
     private void Interact()
     {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if (interactPrompt.activeSelf && Input.GetKeyDown(KeyCode.E))
         {
             shop.SetActive(!shop.activeSelf);
+            inventory.SetActive(shop.activeSelf);
         }
-        else if (!isPlayerInRange)
+        else if (shop.activeSelf && !interactPrompt.activeSelf)
         {
             shop.SetActive(false);
+            inventory.SetActive(false);
         }
     }
 
