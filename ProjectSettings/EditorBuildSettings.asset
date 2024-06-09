@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_FreeUsedAssets/Dark_Brown_GUI_kit/Demo.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/ShopScene.unity
+    guid: ed5e4658d1d38e64683c84d4452628ca
   m_configObjects: {}
