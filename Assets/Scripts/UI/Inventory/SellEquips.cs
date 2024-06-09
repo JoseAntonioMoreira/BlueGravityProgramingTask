@@ -12,16 +12,21 @@ public class SellEquips : MonoBehaviour, IDropHandler, IPointerEnterHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        DraggableItem draggableItem = eventData.pointerDrag.GetComponent<DraggableItem>();
-        inventory.gold += draggableItem.item.SellValue;
-        inventory.goldText.text = inventory.gold.ToString() + " g";
-        Destroy(eventData.pointerDrag);
-        valueText.text = "Sell";
+        SellItem(eventData);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         eventData.pointerDrag.TryGetComponent(out DraggableItem draggableItem);
         valueText.text = draggableItem.item.SellValue.ToString();
+    }
+
+    private void SellItem(PointerEventData eventData)
+    {
+        DraggableItem draggableItem = eventData.pointerDrag.GetComponent<DraggableItem>();
+        inventory.gold += draggableItem.item.SellValue;
+        inventory.goldText.text = inventory.gold.ToString() + " g";
+        Destroy(eventData.pointerDrag);
+        valueText.text = "Sell";
     }
 }

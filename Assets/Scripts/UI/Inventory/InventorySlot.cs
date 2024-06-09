@@ -21,6 +21,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         this.eventData = eventData;
         draggableItem = eventData.pointerDrag.GetComponent<DraggableItem>();
+
         OnItemBought();
         OnItemDropped();
     }

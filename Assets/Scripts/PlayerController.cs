@@ -9,12 +9,10 @@ public class PlayerController : MonoBehaviour
     Inventory inventory;
 
     [SerializeField]
-    private float defaultMoveSpeed = 5;
-    private float currentMoveSpeed;
+    private float moveSpeed = 5;
 
     private void Start()
     {
-        currentMoveSpeed = defaultMoveSpeed;
         anim = transform.GetChild(0).GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -26,7 +24,7 @@ public class PlayerController : MonoBehaviour
         HandleInventory();
     }
 
-    // Attack function
+
     private void HandleAttack()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -39,20 +37,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Character Move function
+
     private void HandleMovement()
     {
         Vector2 playerInput = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        rb.velocity = playerInput * currentMoveSpeed;
+        rb.velocity = playerInput * moveSpeed;
 
         HandleDirection(playerInput);
 
-        // Animation condition
         anim.SetBool("isWalking", playerInput.sqrMagnitude > 0);
     }
 
-    // Handle player direction
+    //Turns the character in the right direction
     private void HandleDirection(Vector2 playerInput)
     {
         if (playerInput.x < 0)

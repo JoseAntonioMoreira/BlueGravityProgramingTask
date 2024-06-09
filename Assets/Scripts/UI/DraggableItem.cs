@@ -23,10 +23,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        initialParent = transform.parent;
-        transform.SetParent(transform.root);
-        transform.SetAsLastSibling();
-        image.raycastTarget = false;
+        DraggedItemAlwaysVisible();
 
         ChangeEquip();
     }
@@ -38,8 +35,17 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        //Attach dragged item to the new slot
         transform.SetParent(initialParent);
         image.raycastTarget = true;
+    }
+
+    private void DraggedItemAlwaysVisible()
+    {
+        initialParent = transform.parent;
+        transform.SetParent(transform.root);
+        transform.SetAsLastSibling();
+        image.raycastTarget = false;
     }
 
     private void ChangeEquip()
