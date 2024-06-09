@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ShopItemGenerator : MonoBehaviour
@@ -7,6 +8,7 @@ public class ShopItemGenerator : MonoBehaviour
     public DraggableItem[] availableItems;
 
     public DraggableItem[] itemsForSale;
+
     void Start()
     {
         itemsForSale = new DraggableItem[19];
@@ -22,7 +24,8 @@ public class ShopItemGenerator : MonoBehaviour
     {
         for (int i = 0; i < itemsForSale.Length; i++)
         {
-            Instantiate(itemsForSale[i].gameObject, transform.GetChild(i + 1).transform);
+            GameObject item = Instantiate(itemsForSale[i].gameObject, transform.GetChild(i + 1).transform);
+            item.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = itemsForSale[i].item.BuyValue.ToString() + " g";
         }
     }
 }

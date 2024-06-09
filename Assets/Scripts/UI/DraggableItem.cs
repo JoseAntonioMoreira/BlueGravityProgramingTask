@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    public bool forSale = true;
+
     private Image image;
 
     public InventoryItem item;

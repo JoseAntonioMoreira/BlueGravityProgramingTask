@@ -14,7 +14,7 @@ public class SellEquips : MonoBehaviour, IDropHandler, IPointerEnterHandler
     {
         DraggableItem draggableItem = eventData.pointerDrag.GetComponent<DraggableItem>();
         inventory.gold += draggableItem.item.SellValue;
-        inventory.RefreshGold();
+        inventory.goldText.text = inventory.gold.ToString() + " g";
         Destroy(eventData.pointerDrag);
         valueText.text = "Sell";
     }

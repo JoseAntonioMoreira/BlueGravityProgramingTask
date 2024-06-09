@@ -16,12 +16,12 @@ public class EquipmentSlot : InventorySlot
 
         if (draggableItem.item.type == gearType)
         {
-            if (transform.childCount > 0)
+            if (transform.childCount == 0)
             {
-                transform.GetChild(0).SetParent(draggableItem.initialParent);
+                draggableItem.initialParent = transform;
+                gearSlot.sprite = draggableItem.item.icon;
             }
-            draggableItem.initialParent = transform;
-            gearSlot.sprite = draggableItem.item.icon;
+
         }
     }
 }

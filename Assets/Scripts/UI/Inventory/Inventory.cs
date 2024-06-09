@@ -9,14 +9,14 @@ public class Inventory : MonoBehaviour
     public TextMeshProUGUI goldText;
     public InventoryItem[] Items;
 
+    private void Start()
+    {
+        goldText.text = gold.ToString() + " g";
+    }
+
     public void ToggleInventory()
     {
         gameObject.SetActive(!gameObject.activeSelf);
-        RefreshGold();
-    }
-
-    public void RefreshGold()
-    {
         goldText.text = gold.ToString() + " g";
     }
 }
