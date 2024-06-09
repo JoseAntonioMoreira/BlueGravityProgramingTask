@@ -13,8 +13,6 @@ public class ShopKeeper : MonoBehaviour
     [SerializeField]
     private GameObject interactPrompt;
 
-    private bool isPlayerInRange = false;
-
     void Update()
     {
         Interact();
@@ -38,7 +36,6 @@ public class ShopKeeper : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            isPlayerInRange = true;
             interactPrompt.SetActive(true);
         }
     }
@@ -47,7 +44,6 @@ public class ShopKeeper : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            isPlayerInRange = false;
             interactPrompt.SetActive(false);
         }
     }

@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class SellEquips : MonoBehaviour, IDropHandler, IPointerEnterHandler
+{
+    public Inventory inventory;
+    public TextMeshProUGUI valueText;
+
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        DraggableItem draggableItem = eventData.pointerDrag.GetComponent<DraggableItem>();
+        inventory.gold += draggableItem.item.SellValue;
+        inventory.RefreshGold();
+        Destroy(eventData.pointerDrag);
+        valueText.text = "Sell";
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        eventData.pointerDrag.TryGetComponent(out DraggableItem draggableItem);
+        valueText.text = draggableItem.item.SellValue.ToString();
+    }
+}
